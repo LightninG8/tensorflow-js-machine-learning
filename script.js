@@ -47,8 +47,8 @@ var model = undefined;
 // Модели машинного обучения могут быть большими и занимать некоторое время
 // чтобы получить все необходимое для запуска.
 // Примечание: cocoSsd - это внешний объект, загруженный из нашего index.html
-// импорт тега скрипта, поэтому игнорируйте любые предупреждения в
-Glitch.cocoSsd.load().then(function (loadedModel) {
+// импорт тега скрипта, поэтому игнорируйте любые предупреждения в Glitch
+cocoSsd.load().then(function (loadedModel) {
   model = loadedModel;
   // Показать демонстрационный раздел, теперь модель готова к использованию.
   demosSection.classList.remove('invisible');
@@ -57,7 +57,8 @@ Glitch.cocoSsd.load().then(function (loadedModel) {
 var children = [];
 
 function predictWebcam() {
-// Теперь приступим к классификации кадра в потоке.  model.detect(video).then(function (predictions) {
+// Теперь приступим к классификации кадра в потоке. 
+model.detect(video).then(function (predictions) {
     // Удаляем любое выделение, которое мы сделали в предыдущем кадре.
     for (let i = 0; i < children.length; i++) {
       liveView.removeChild(children[i]);
@@ -93,4 +94,4 @@ function predictWebcam() {
     
     // Вызов этой функции еще раз, чтобы предсказывать, когда браузер будет готов.
     window.requestAnimationFrame(predictWebcam);
-  }
+  });}
